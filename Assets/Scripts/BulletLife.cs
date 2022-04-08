@@ -9,6 +9,7 @@ public class BulletLife : MonoBehaviour
     Transform bulletTrans;
     Vector3 dir;
     GameObject lastDir;
+    GameObject[] enemy;
 
     public void Direction(Vector3 direction)
     {
@@ -17,6 +18,7 @@ public class BulletLife : MonoBehaviour
 
     private void Awake()
     {
+        enemy = GameObject.FindGameObjectsWithTag("Enemy");
         bulletTrans = GetComponent<Transform>();
         Destroy(gameObject, 1.5f);
     }
@@ -24,5 +26,14 @@ public class BulletLife : MonoBehaviour
     void Update()
     {
         bulletTrans.position += dir * speed * Time.deltaTime;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(gameObject);
+            Destroy(collision.gameObject);
+        }
     }
 }
