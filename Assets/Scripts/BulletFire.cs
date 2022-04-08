@@ -28,7 +28,7 @@ public class BulletFire : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             bullet = Instantiate(bulletPrefab);
-            bullet.transform.position = bulletFire.transform.position;
+            bullet.transform.position = bulletFire.transform.position + new Vector3(0.2f, 0.4f, 0);
             bullet.GetComponent<BulletLife>().Direction(lastDir);
         }
     }
